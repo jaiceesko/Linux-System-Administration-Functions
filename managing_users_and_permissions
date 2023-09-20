@@ -1,0 +1,24 @@
+# MANAGING USERS AND PERMISSIONS
+# for example, we may have a marketing specialist named cee, or an IT administrator named Baiyenah,
+# Who both need to access the server according to their roles.
+
+# creating our new employees user account with useradd command
+ sudo useradd -m -d /home/cee -s /bin/bash cee
+ 
+# creating IT admin user account Baiyenah with adduser in Ubuntu.
+# adduser command will prompt you user fullname, password, create the user home,
+# and copy files from /etc/skel
+ sudo adduser baiyenah
+
+# we can use passwd command to create password for cee and baiyenah.
+ sudo passwd cee
+
+# Removing users
+# Removing or disabling an account is very important when a user no longer needs to access a system.
+# we first backup the files
+
+ sudo mv /home/cee /var/store/file_archive
+
+# we remove a users' home directory at the same time that you remove an account.
+
+sudo userdel -r cee
