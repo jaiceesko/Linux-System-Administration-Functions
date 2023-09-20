@@ -22,3 +22,67 @@
 # we remove a users' home directory at the same time that you remove an account.
 
 sudo userdel -r cee
+
+
+# See list of users and detailed information about them.
+
+ cat /etc/passwd
+
+# To list or see users encrypted password stored. the shadow file is own by user root.
+
+ sudo cat /etc/shadow
+
+# Information regarding the groups that have been created on your system.
+
+ cat /etc/group
+
+ groups <username>
+
+# Creating new groups. eg. creating a sales group for sales department.
+
+ sudo groupadd sales                # redhat
+
+ sudo addgroup sales               # debian
+
+# To delete a group for redhat and debian
+
+ sudo groupdel sales
+
+ sudo delgroup sales
+
+# To add sales specialist baiyenah to sales group.
+
+ sudo usermod -aG sales baiyenah
+# this command below will produce similar results. to add multiple users add -M.
+ sudo gpasswd -a sales baiyenah
+
+# Lets say baiyenah moves to IT department we could change her primary group to admins.
+
+ sudo usermod -g admins baiyenah
+
+# If you wish to remove a user from a group, you can use gpasswd command or deluser command.
+
+ sudo gpasswd -d baiyenah admins
+
+ sudo deluser baiyenah admins 
+
+# shows when the password was last changed or password status.
+
+ sudo passwd -S <username>
+
+ sudo passwd -S cee
+
+
+# MANAGING PASSWORDS AND PASSWORD POLICIES.
+
+
+# How many days are required to pass  before the user will be able to change their password again.
+
+# Setting a minimum number of days to force a waiting period in between password changes
+# Making it less convenient for your users to change back to old password.
+
+# The maximum number of days that can pass between password changes.
+
+# the number of days that will pass before the expiration date on which user are warned of password change.
+
+# We set how many days can pass after the password expires, in which case the account will be disabled.
