@@ -1,0 +1,50 @@
+# CONTROLLING AND MANAGING RUNNING PROCESSES
+# We can background a process without waiting for it to complete while working on something else.
+
+ sudo apt install vim-nox         # In debian
+
+ sudo dnf install vim-nox         # Redhat
+
+ vim file1 &
+
+ htop &
+
+# to install htop
+
+ sudo apt install htop
+
+# We can bring that process back to the front to return to working on it
+
+# We can use jobs command and fg to view and bring the jobs foreground
+
+ jobs
+
+ fg <job_id>
+
+ fg 2
+
+
+# To see the job number of our process, its status, and then the name of the process.
+
+ ps aux | grep vim
+
+ ps au | grep htop
+
+# VIEWING RUNNING PROCESSES
+# When executed by itself, the ps command will show a list of processes run by the user who called the command.
+
+ ps
+
+# To see more detailed information about the running processes.
+ ps a
+
+ ps aux
+
+ ps aux | grep systemd
+
+# We sort current processes by percentage of CPU utilization and most-used memory.
+
+ ps aux --sort=-pcpu | head -n 5
+ 
+ ps aux --sort=-pmem | head -n 7
+ 
