@@ -75,8 +75,35 @@ sudo userdel -r cee
 
 # MANAGING PASSWORDS AND PASSWORD POLICIES.
 
+# Manage to lock the root account
+
+ sudo passwd -l root
+
+# For security reasons, you would want to lock a normal user account
+# For many reasons maybe the user is on vacation or extended leave.
+
+ sudo passwd -l cee
+
+# To unlock the account
+
+ sudo passwd -u cee
+
+# To see password expiration information
+
+ sudo chage -l <username>
+ sudo chage -l cee
+
+# To force password change when a user first log in. set number of days to expiry to 0.
+
+ sudo chage -d 0 cee
 
 # How many days are required to pass  before the user will be able to change their password again.
+
+ sudo chage -M 90 cee
+
+# To change the 90 days to lower number like 60 days
+
+ sudo chage -m 60 cee
 
 # Setting a minimum number of days to force a waiting period in between password changes
 # Making it less convenient for your users to change back to old password.
