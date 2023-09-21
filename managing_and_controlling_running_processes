@@ -28,7 +28,6 @@
 
  ps aux | grep vim
 
- ps au | grep htop
 
 # VIEWING RUNNING PROCESSES
 # When executed by itself, the ps command will show a list of processes run by the user who called the command.
@@ -48,3 +47,78 @@
  
  ps aux --sort=-pmem | head -n 7
  
+
+# CHANGING THE PRIORITY OF PROCESSES
+# Listing processes priority and niceness value
+
+ ps -l
+
+# To give a existing process less priority. Give higher nice value.
+ renice -n <nice_value> -p <pid_number>
+ renice -n 10 -p 4234
+
+# Giving high priority to existing process. we need sudo privilege.
+
+ sudo renice -n -10 -p 4234
+
+# When starting a new process, use nice command to asssign nice value.
+
+ nice -n 0 bash
+
+
+# DEALING WITH MISBEHAVING PROCESSES
+# To kill process gracefully.
+
+ sudo kill 4234
+
+ sudo killall myprocess
+
+# To kill a stubborn or zombie process.
+
+ sudo kill -9 4234
+
+ sudo killall -9 myprocess 
+
+
+# MANAGING SYSTEM PROCESSES
+
+# Known as daemon, are programs that run when the system booting. 
+
+ systemctl status ssh
+
+ systemctl status ftp
+
+ systemctl | grep ftp
+
+# To see the full log entries, add -l option.
+
+ systemctl status -l ssh
+
+# Starting a system process or units.
+
+ sudo systemctl start ftp.service
+
+# To stop a units
+
+ sudo systemctl stop ftp.service
+
+# To restart a units
+
+ sudo systemctl restart ftp.service
+
+# To active a new configuration settings without needing to bring down the entire application.
+
+ sudo systemctl reload ftp.service
+
+# To start a units automatically when the system boots.
+
+ sudo systemctl enable ftp.service
+
+# To disable a system process.
+
+ sudo systemctl disable ftp.service
+
+# To enable and start a units at the same time.
+
+ sudo systemctl enable --now ssh
+
