@@ -75,6 +75,10 @@ sudo userdel -r cee
 
 # MANAGING PASSWORDS AND PASSWORD POLICIES.
 
+# Set a user password
+
+ sudo passwd voltron
+
 # Manage to lock the root account
 
  sudo passwd -l root
@@ -82,11 +86,11 @@ sudo userdel -r cee
 # For security reasons, you would want to lock a normal user account
 # For many reasons maybe the user is on vacation or extended leave.
 
- sudo passwd -l cee
+ sudo passwd -l voltron
 
 # To unlock the account
 
- sudo passwd -u cee
+ sudo passwd -u voltron
 
 # To see password expiration information
 
@@ -97,19 +101,25 @@ sudo userdel -r cee
 
  sudo chage -d 0 cee
 
+# To expire a user account in 30 days
+
+ sudo passwd -x 30 cee
+
+ sudo chage -E 2023-10-30 voltron
+
 # How many days are required to pass  before the user will be able to change their password again.
 
  sudo chage -M 90 cee
 
-# To change the 90 days to lower number like 60 days
+# To set minimum number of days for password change.
 
  sudo chage -m 60 cee
 
-# Setting a minimum number of days to force a waiting period in between password changes
-# Making it less convenient for your users to change back to old password.
-
-# The maximum number of days that can pass between password changes.
 
 # the number of days that will pass before the expiration date on which user are warned of password change.
 
-# We set how many days can pass after the password expires, in which case the account will be disabled.
+ sudo passwd -x 30 -w 5 cee
+
+# Disabling an account
+
+ sudo usermod --expiredate 1 cee
