@@ -1,0 +1,81 @@
+# ADDING AND REMOVING SOFTWARE
+
+
+# USING APT TO HANDLE SOFTWARE IN DEBIAN DISTROS
+# The default software manager is the Advanced Packaging Tool or apt
+
+# Searching for a package
+
+apt-cache search <keyword>
+apt-cache search htop
+
+# Adding Software
+
+sudo apt-get install <packagename>
+sudo apt-get install snort
+
+# Removing Software
+
+sudo apt-get remove snort
+
+# Removing Software Permanently
+
+sudo apt-get remove --purge <packagename>
+
+# Updating Packages
+
+sudo apt-get update
+
+# Upgrading Packages
+
+sudo apt-get upgrade
+
+
+# USING DNF TO HANDLE SOFTWARE IN REDHAT DISTROS
+
+# Searching for a Package
+
+dnf search <keyword>
+
+# To search for a package name and list the package details
+
+dnf repoquery <package_name>
+
+# List all enabled repositories on your system
+
+dnf repolist
+
+
+# Adding Software
+
+sudo dnf install <packagename>
+
+# Removing Software
+
+sudo dnf remove <package_name>
+
+# Updating Packages
+
+# To check for available updates
+
+dnf check-update
+
+# Updating packages
+
+sudo dnf upgrade
+
+# To update a single package
+
+sudo dnf upgrade <package_name>
+
+
+
+# ADDING REPOSITORIES TO YOUR SOURCES.LIST FILE
+
+nano /etc/apt/sources.list
+
+
+# INSTALLING SOFTWARE WITH GIT
+
+# Let's download spiderfoot tool is an open source intelligence automation tool.
+git clone https://www.github.com/smicallef/spderfoot

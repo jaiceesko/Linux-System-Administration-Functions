@@ -1,0 +1,104 @@
+# CONTROLLING FILE AND DIRECTORY PERMISSIONS
+
+# Linux has methods for securing file and directory access.
+# This allows the system administrator or file owner to protect their files from unauthorized users.
+
+
+# Granting Ownership to an Individual User
+
+sudo chown bobby /tmp/bobsfile
+
+# Granting Ownership to a Group
+
+sudo chgrp security IDStool
+
+# Checking Permissions
+
+ls -la /home/bobby
+
+# CHANGING PERMISSIONS
+
+# Changing Permissions with Decimal Notation
+
+sudo chmod 740 bobsfile
+
+sudo chmod 774 /etc/wireshark
+
+
+# Changing Permissions with UGO
+
+sudo chmod ugo=rwx /tmp/bobsfile
+
+sudo chmod go-wx /tmp/bobsfile
+
+sudo chmod g+w /tmp/bobsfile
+
+sudochmod u+wx, g-x, o-wx /tmp/bobsfile
+
+
+# Setting More Secure Default Permissions with Masks
+
+# Linux automatically assigns base permissions-- usually 666 for files and 777 for directories.
+# we can change the default permissions with umask method
+
+umask
+
+# The umask default to 022. edit the /home/<username>.profile and add umask 007
+umask 007
+
+
+# SPECIAL PERMISSIONS
+# Linux has special permissions that are more complicated.
+# set user ID (SUID), set group ID (SGID).
+
+
+# Granting Temporary Root Permissions with SUID
+# To set the SUID bit, enter a 4 before the regular permissions
+
+sudo chmod 4764 /tmp/bobfile
+
+sudo chmod ug+srw filename
+
+sudo chmod ug-s filename
+
+# Granting the Root User's Group Permissions SGID
+# to set the SGID bit, enter a 2 before the regular permissions
+sudo chmod 2644 filename
+
+
+# Special Permissions, Privilege Escalation, and the Hacker.
+# Hackers can take advantage of special permissions to exploit linux systems through privilege escalation,
+# whereby a regular user gains root or sysadmin privileges
+
+find / -user root -perm -4000
+cd /usr/bin 
+# look for permissions with s bit which represent suid is set
+
+
+# CONFIGURING FILE ATTRIBUTES AND ACCESS CONTROL LISTS
+# Linux offers advanced features to provide more security for files and directories.
+
+# File Attributes
+# File attributes allow an operator to provide additional capabilities to files
+
+sudo chattr +i contacts.odt
+
+sudo chattr +a contacts.odt
+
+lsattr contacts.odt
+
+# to remove file attributes
+
+sudo chattr -i contacts.odt
+
+
+# File Access Control Lists
+# Users can extend their file security setings with ACLs
+
+# To view the current ACLs settings, use the getfacl command.
+
+getfacl contacts.odt
+
+# To modify privileges on files or directories
+
+sudo setfacl -m u:omar:r contacts.odt

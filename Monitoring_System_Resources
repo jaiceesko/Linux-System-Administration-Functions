@@ -1,0 +1,42 @@
+# MONITORING SYSTEM RESOURCES
+
+# One resources that is extremely important is storage, and keeping track of such things 
+# as available disk space is critical.
+
+
+# Viewing Disk Usage
+
+# View file system disk usage of your currently mounted filesystems with df command
+
+df
+
+df -h
+
+
+# To know what files or directories are taking up that space, use du command.
+
+du -h
+
+sudo du -h /
+
+# -h for human readable
+
+# Determining whether or not we are running out of inodes on a particular storage volume.
+
+df -i
+
+sudo du --inodes
+
+# use -h option with -s gives us a summary and -c provides with the total amount of space used.
+
+sudo du -hsc *
+
+
+# ncdu command or Ncurses Disk Usage utility
+
+sudo apt install ncdu
+
+ncdu
+
+
+# Monitoring Memory Usage
