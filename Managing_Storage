@@ -1,0 +1,77 @@
+# Managing Disks and Filesystems
+
+# Viewing Disk Partitions
+
+
+# Displays a list of block devices and their partitions.
+
+lsblk
+
+# Displays the partition table of all block devices.
+
+sudo fdisk -l
+
+#  Displays the partition information and logical volume information.
+# Use for GUID partition tables
+
+sudo parted -l
+
+sudo parted -l /dev/sda
+
+
+# Creating Partitions
+
+# Creating partitions with fdisk command
+
+lsblk
+
+fdisk -l /dev/sdb
+
+mount | grep sdb
+
+sudo umount /dev/sdb1
+
+sudo fdisk /dev/sdb
+
+
+# Creating partitions with fdisk command
+
+sudo parted /dev/sdb
+
+sudo parted -l /dev/sdb
+
+
+# Formatting a partitions
+
+sudo apt install xfsprogs
+
+sudo mkfs -t xfs /dev/sdb1
+
+# or
+
+sudo mkfs.xfs /dev/sdb1
+
+# Creating a mount point
+
+mkdir /mnt/test
+
+sudo mount /dev/sdb1 /mnt/test
+
+lsblk
+
+sudo df -h /mnt/sdb1 
+
+
+# Unmounting Volumes
+
+sudo umount /mnt/test
+
+# device UUIDs
+
+blkid /dev/sdb1
+
+# Backing up the /etc/fstab before editing it.
+
+sudo cp -v /etc/fstab /etc/fstab.backup
+
+sudo nano /etc/fstab
