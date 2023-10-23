@@ -1,0 +1,120 @@
+# GETTING STARTED WITH LVM
+
+# To find out if the required lvm2 package is installed.
+
+apt search lvm2
+
+
+# Installing lvm2 package
+
+sudo apt install lvm2
+
+# the pvcreate command configure our disks for use with LVM.
+
+sudo pvcreate /dev/sdb
+
+sudo pvcreate /dev/sdc
+
+sudo pvcreate /dev/sdd
+
+# use pvdisplay command to display physical volumes.
+
+sudo pvdisplay
+
+# we create a volume group
+
+sudo vgcreate vg-tester /dev/sdb
+
+sudo vgcreate vg-marketing /dev/sdc
+
+# we display our volume groups created.
+
+sudo vgdisplay
+
+
+# creating a logical volume and format it
+
+sudo lvcreate -n tester_vol1 -L 60g vg-tester
+
+sudo lvcreate -n marketing_vol1 -L 50g vg-marketing
+
+
+# Formatting Logical Volumes
+
+# We need to format our logical volume so that it can be used.
+
+sudo mkfs.ext4 /dev/vg-tester/tester_vol1
+
+sudo mkfs.ext4 /dev/vg-marketing/marketing_vol1
+
+# mounting the hard disk
+
+sudo mount /dev/vg-tester/tester_vol1 /mnt/lvm/tester_vol1
+
+sudo mount /dev/vg-marketing/marketing_vol1 /mnt/lvm/marketing_vol1
+
+# to check that our volume is mounted
+
+sudo df -h
+
+
+# extending our logical disk with lvextend command.
+
+sudo lvextend -n /dev/vg-marketing/marketing_vol1 -l +60g
+
+sudo lvextend -n /dev/vg-tester/tester_vol1 -l +100%FREE
+
+sudo df -h
+
+# the df command might not show extra space assign to tester_vol1
+
+sudo resize2fs /dev/mapper/vg--tester-tester_vol1
+
+sudo resize2fs /dev/vg-marketing/marketing_vol1
+
+sudo df -h
+
+
+# we can add additional physical volumes to our volume group with the vgextend command.
+
+sudo vgextend vg-tester /dev/sdd
+
+sudo pvdisplay
+
+sudo lvextend -L+10g /dev/vg-tester/tester_vol1
+
+# make the free space available to the filesystem
+
+sudo resize2fs /dev/vg-tester/tester_vol1
+
+
+# Removing Volumes with LVM
+
+# to remove a logical volume
+
+sudo lvremove vg-tester/tester_vol1
+
+
+# to remove a volume group
+
+sudo vgremove vg-marketing
+
+
+
+# Understanding LVM snapshots
+
+# LVM smapshots allow you to capture a logical volume at a certain point in time and preserve it.
+
+# creating a logical volume snapshot.
+
+sudo lvcreate -s -n mysnapshot -L 10g vg-tester/tester_vol1
+
+lvs
+
+# we can roll back to a snapshot
+
+sudo lvconvert --merge vg-tester/mysnapshot
+
+# removing the snapshot permanent.
+
+sudo lvremove vg-tester/mysnapshot
