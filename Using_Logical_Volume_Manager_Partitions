@@ -1,0 +1,92 @@
+### USING LOGICAL VOLUME MANAGER PARTITIONS
+
+## Checking an existing LVM
+
+sudo fdisk -l /dev/sdb | grep /dev/sdb
+
+sudo apt install lvm2
+
+# Display LVM group
+
+sudo pvdisplay /dev/sdb1
+
+# See information about volume group.
+
+sudo vgdisplay vg_devops
+
+# Logical volume info
+
+sudo lvdisplay vg_devops
+
+
+## Creating LVM logical volumes
+
+# create new partitions
+
+lsblk
+
+sudo fdisk /dev/sdb
+
+sudo fdisk -l /dev/sdb
+
+# Create a LVM physical volume
+
+sudo pvcreate /dev/sdb1
+
+# Display physical volume
+
+sudo pvdisplay /dev/sdb1
+
+# Add the physical volume to a new volume group
+
+sudo vgcreate vg_devops /dev/sdb1
+
+# To see new volume group
+
+sudo vgdisplay vg_devops
+
+# Create a logical volume
+
+sudo lvcreate -n devops_vol1 -L 10G vg_devops
+
+# Display the logical volume
+
+sudo lvdisplay vg_devops
+
+
+ls /dev/vg_devops
+
+
+# The device can now be used to put a filesystem on and mount
+
+sudo mkfs -t ext4 /dev/vg_devops/devops_vol1
+
+sudo mkdir /mnt/devops_folder
+
+# mount
+
+sudo mount /dev/vg_devops/devops_vol1 /mnt/devops_folder
+
+sudo df -h /mnt/devops_folder
+
+
+
+### Growing LVM logical volumes
+
+# if you run out of space on a logical volume, you can add space to it without even unmounting it,
+
+sudo vgdisplay vg_devops
+
+sudo df -h /mnt/devops_folder
+
+# expand the logical volume using the lvextend command
+
+sudo lvextend -L +10G /dev/mapper/vg_devops-devops_vol1
+
+# Resize the filesystem to fit the new logical volume size.
+
+sudo resize2fs -p /dev/mapper/vg_devops-devops_vol1
+
+# Check to see that the filesystem is now resized to include the additional disk space.
+
+sudo df -h /mnt/devops_folder
