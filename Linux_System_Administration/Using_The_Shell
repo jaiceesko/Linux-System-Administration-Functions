@@ -1,0 +1,123 @@
+### USING THE SHELL
+
+# Running Commands
+
+
+# print user and group information for specified user
+
+id
+
+# print the current system signed in user
+
+who
+
+# date
+
+date
+
+# current working directory
+
+pwd
+
+# user username
+
+username
+
+whoami
+
+# the computer hostname
+
+hostname
+
+# the home working directory
+
+echo $HOME
+
+# listing directories
+
+ls
+ls -l /etc/share
+
+ls -la
+
+ls -d /home/joe
+
+# to hide a content
+
+ls --hide=Desktop
+
+# display content
+
+sudo cat /etc/passwd
+
+sudo nano /etc/shadow
+
+# to backup joe home directory including subdirectories
+
+sudo tar -cvf backup.tar /home/joe
+
+# the type of ystem you are running and print system information
+
+uname
+
+uname -a
+
+# locating commands
+
+echo $PATH
+
+which passwd
+
+find / -name "passwd"
+
+type passwd
+type nano
+
+# install the locate command first
+
+sudo apt install plocate
+
+# update the locate database
+
+sudo run updatedb
+
+locate chage
+
+# recalling command history
+
+history
+
+# piping between commands
+
+cat /etc/passwd | sort | less
+
+# sequential commands
+
+date; man passwd > passwd.doc; date
+
+# send a mail
+
+; mail -s "Finished the long command" joe@example.com
+
+
+# running commands in the background
+
+nano test.txt &
+
+htop &
+
+# creating and using aliases
+
+alias p='pwd;ls -CF'
+
+alias rm='rm -i'
+
+# checking aliases
+
+alias
+
+# removing aliases
+
+unalias p
+
+unalias rm
