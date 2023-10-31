@@ -1,0 +1,85 @@
+### MOVING AROUND THE FILE FILESYSTEM
+
+# Navigating a filesystem
+
+cd /home/joe
+
+# Listing directories, subdirectories and their content
+
+ls -la /home/joe
+
+cat myfile.txt
+
+
+## Using Basic Filesystem Commands
+
+# Changes to another directory
+
+cd /etc/passwd
+
+# Current working directory
+
+pwd
+
+# Create a directory
+
+mkdir memo
+
+cd memo
+
+touch memo.txt
+
+# Changes the permission on a file or directory
+
+sudo chmod -R 755 $HOME/campaign
+
+sudo chmod go-rwx memo.txt
+
+# List the content of a directory
+
+ls -la /home/joe/memo
+
+# Check the permissions of a directory
+
+ls -ld /home/joe/memo
+
+## Using file-redirection
+
+echo "Hello World" > memo.txt
+
+cp /home/campaign/campaign1.txt ~/marketing/urgentmeeting.txt
+
+mv urgentmeeting.txt memo.txt
+
+echo "I finished the project on $(date)" >> memo.txt
+
+cat /etc/shadow 2> /dev/null
+
+echo "Docker tutorial" &> docker.txt
+
+man passwd | head -n 20
+
+
+## Setting default file permission with umask
+
+umask
+
+# temporary umask
+
+umask 027; touch applunch.txt
+
+umask 007; mkdir myapp
+
+umask 0002; touch apple.txt
+
+# To change umask permanent add to .bashrc file in your home directory.
+
+## Changing file ownership
+
+# Change from ownership joe to zaira
+
+sudo chown zaira /home/joe/memo/memo.txt
+
+# To change both user and group owner
+
+sudo chown zaira:sales /home/joe/memo/memo.txt
