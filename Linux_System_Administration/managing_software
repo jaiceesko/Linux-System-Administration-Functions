@@ -1,0 +1,66 @@
+### INSTALLING AND MANAGING SOFTWARE PACKAGES
+
+# Ubuntu and Debian utilize the apt and dpkg commands to manage packages.
+
+# Managing debian packages with apt
+
+sudo apt update
+
+sudo apt upgrade
+
+sudo apt install nmap
+
+sudo apt install openssh-server, htop &
+
+sudo apt remove nmap
+
+sudo apt remove --purge nmap
+
+
+# Managing Snap packages with snap
+
+snap find wireshark
+
+sudo snap install wireshark
+
+# check wireshark location after installed
+
+which wireshark
+
+sudo snap remove wireshark
+
+# to update a snap
+
+sudo snap refresh
+
+# to update a package
+
+sudo snap refresh wireshark
+
+# search for packages
+
+apt search theHarvester
+
+snap find theHarvester
+
+
+
+## Managing packages in RHEL
+
+# In RHEL use yum and dnf for finding,installing and managing RPM packages.
+
+# search software repositories
+
+sudo dnf repolist --all | more
+
+# find software to install
+
+sudo dnf update && upgrade
+
+sudo dnf search wireshark
+
+sudo dnf install wireshark
+
+sudo dnf update wireshark
+
+sudo dnf remove wireshark
