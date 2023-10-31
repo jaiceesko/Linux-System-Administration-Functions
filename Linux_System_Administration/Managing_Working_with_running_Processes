@@ -1,0 +1,93 @@
+### MANAGING LINUX PROCESSES
+
+## Processes is an instance of running program.
+
+## Linux provides tools for listing running processes
+
+ps u
+
+ps ux
+
+ps aux
+
+# Finding process id
+
+pgrep firefox
+
+
+ps -eo pid,user,group,gid,vsz.rss.comm | less
+
+ps -eo pid,user,group,gid,vsz,pcpu,pmem,comm --sort=-pcpu | head
+
+
+## Monitoring processes with top and htop
+
+top
+
+sudo apt install htop
+
+htop
+
+## Managing Background and Foreground Processes
+
+
+# Starting background processes
+
+htop &
+
+find /usr > tmp/alluserfiles &
+
+vi /home/joe/campaign2024 &
+
+# Check commands running in the background 
+
+jobs
+
+# to display process ID for the background job
+
+jobs -l
+
+# to foreground a  background job
+
+fg %<job_id>
+
+fg %3
+
+
+## Killing and Renicing Processes
+
+# Killing processes with kill command to signal processes by pid
+
+pgrep htop
+
+# to kill process clean with default signal 15
+
+sudo kill 3002
+
+# to kill a process by force with signal 9
+
+sudo kill -9 3005
+
+# killall command to signal processes by name
+
+sudo killall -9 htop
+
+sudo killall testme
+
+
+## Setting Processor priority with nice and renice
+# every process running on your system has a nice value between -20 and 19.
+
+# to display the nice value
+
+top
+
+htop
+
+# you can set the nice value for a particular command
+
+sudo nice -n +5 updatedb &
+
+# you can change the nice value with renice command as a root or admin privilege
+
+# renice -n -5 20231
